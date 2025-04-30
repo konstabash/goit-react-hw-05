@@ -1,0 +1,18 @@
+.castImage {
+  width: 200px;
+  height: 300x;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-evenly;
+}
+
+.actor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
