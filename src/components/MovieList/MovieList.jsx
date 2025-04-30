@@ -16,7 +16,6 @@ const MovieList = ({ query }) => {
           const trendingData = await fetchTrending();
           setMovies(trendingData.results);
         }
-        console.log(query);
       } catch {
         (error) => console.log(error);
       }
