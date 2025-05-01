@@ -17,8 +17,8 @@ const MovieCast = lazy(() => import("../MovieCast/MovieCast"));
 function App() {
   return (
     <div className={s.container}>
-      <Suspense fallback={<p>Loading ...</p>} />
       <Navigation />
+      <Suspense fallback={<p>Loading ...</p>} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="movies" element={<MoviesPage />} />
@@ -28,6 +28,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Suspence />
     </div>
   );
 }
