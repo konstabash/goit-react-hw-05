@@ -7,14 +7,22 @@ const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("query") ?? "";
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
+      if (!searchQuery) return;
+
       try {
+        setError(null);
+        setIsLoading(true);
         const searchData = await fetchSearch(searchQuery);
         setMovies(searchData.results);
       } catch {
-        (error) => console.log(error);
+        setError("Something went wrong. Please try again.");
+      } finally {
+        setIsLoading(false);
       }
     };
     getData();
@@ -22,6 +30,7 @@ const MoviesPage = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
+
     const query = e.target.elements.input.value.trim();
     if (query) {
       searchParams.set(`query`, query);
@@ -34,8 +43,10 @@ const MoviesPage = () => {
       <form onSubmit={handleSearchSubmit}>
         <input type="text" name="input" />
         <button type="submit">Search</button>
-        {searchQuery && <MovieList movies={movies} />}
       </form>
+      {isLoading && <p>Loading ...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {searchQuery && !isLoading && !error && <MovieList movies={movies} />}
     </div>
   );
 };

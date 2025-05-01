@@ -11,12 +11,12 @@ const HomePage = () => {
       try {
         const trendingData = await fetchTrending();
         setMovies(trendingData.results);
-      } catch {
-        (error) => console.log(error);
+      } catch (error) {
+        console.log(error);
       }
     };
     getData();
-  });
+  }, []);
 
   return (
     <div className={s.container}>
